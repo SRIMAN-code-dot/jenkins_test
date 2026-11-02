@@ -1,25 +1,30 @@
+
 pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/SRIMAN-code-dot/jenkins_test.git'
+            }
+        }
+
         stage('Build') {
             steps {
-                echo 'Building project...'
-                sh 'ls -l'
+                sh 'mvn clean compile'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing project...'
-                sh 'test -f index.html'
-                echo 'Test passed!'
+                sh 'mvn test'
             }
         }
 
-        stage('Deploy') {
+        stage('Package') {
             steps {
-                echo 'Deployment successful!'
+                sh 'mvn package'
             }
         }
     }
