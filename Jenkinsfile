@@ -2,11 +2,14 @@
 pipeline {
     agent any
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/SRIMAN-code-dot/jenkins_test.git'
+                checkout scm
             }
         }
 
@@ -26,6 +29,13 @@ pipeline {
             steps {
                 sh 'mvn package'
             }
+        }
+    }
+
+    post {
+        success {
+            archiveArtifacts artifacts: 'target/*.jar',
+                             fingerprint: true
         }
     }
 }
