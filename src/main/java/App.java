@@ -1,16 +1,9 @@
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-public class AppTest {
-
-    @Test
-    public void testAddition() {
-        assertEquals(30, App.add(10, 20));
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Hello from Jenkins CI/CD Pipeline!");
     }
 
-    @Test
-    public void testAdditionWithNegativeNumbers() {
-        assertEquals(0, App.add(-10, 10));
+    public int add(int a, int b) {
+        return a + b;
     }
 }
